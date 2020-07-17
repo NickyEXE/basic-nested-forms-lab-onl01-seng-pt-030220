@@ -1,8 +1,5 @@
 class Recipe < ActiveRecord::Base
   has_many :ingredients
-  accepts_nested_attributes_for :ingredients
+  accepts_nested_attributes_for :ingredients, reject_if: proc { |attributes| attributes['name'] == "" }
 
-  def ingredients_attributes=(ingredient)
-    self.ingredients.build(ingredient)
-  end
 end
